@@ -9,6 +9,15 @@ namespace CallOfDuty
     {
         private StudentRepository db;
 
+        private int selectFromCount;
+
+        public int SelectFromCount
+        {
+            get { return selectFromCount; }
+            set { selectFromCount = value; }
+        }
+
+
         public StudentDuty(StudentRepository db)
         {
             this.db = db;
@@ -29,7 +38,8 @@ namespace CallOfDuty
             var selectFrom = db.Students;
             if (except != null) 
                 selectFrom = selectFrom.Except(except).ToList();
-
+            SelectFromCount = selectFrom.Count;
+            //Console.WriteLine(SelectFromCount);
             if (selectFrom.Count < count)
                 throw new StudentDutyException("Нужно больше студентов");
 

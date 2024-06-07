@@ -3,6 +3,7 @@
     public class SelectDuty
     {
         private StudentDuty studentDuty;
+        private int regectCount;
 
         public SelectDuty(StudentDuty studentDuty)
         {
@@ -30,7 +31,13 @@
 
         private void Reject(Student student)
         {
+            if (regectCount == 30)
+            {
+                IfNoAvailableVictims();
+                return;
+            }
             SetStudentStatus(student, false);
+            regectCount++;
         }
 
         private Student GetAnotherStudent(Student student)
@@ -43,9 +50,20 @@
 
         private void SetStudentStatus(Student student, bool status)
         {
-            if (!studentStatus.ContainsKey(student))
-                studentStatus.Add(student, status);
-            studentStatus[student] = status;
+             if (!studentStatus.ContainsKey(student))
+                 studentStatus.Add(student, status);
+             studentStatus[student] = status;    
+        }
+
+        private void IfNoAvailableVictims()
+        {
+            List<Student> victims = studentDuty.GetRandomStudents(studentDuty.SelectFromCount, studentStatus.Keys);
+
+            foreach (Student student in victims)
+            {
+                Approve(student);
+            }
+
         }
 
         public void Save()

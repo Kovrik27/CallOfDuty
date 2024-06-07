@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CallOfDuty.Tests
+﻿namespace CallOfDuty.Tests
 {
     public class SelectDutyStateTests
     {
@@ -100,6 +93,12 @@ namespace CallOfDuty.Tests
             {
                 Assert.That(studentDuty.GetDutyCount(stud), Is.EqualTo(1));
             }
+        }
+
+        [Test]
+        public void NoSelectedStudent()
+        {
+
         }
     }
 }
